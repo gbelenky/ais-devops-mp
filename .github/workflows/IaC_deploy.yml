@@ -35,7 +35,7 @@ jobs:
         # You can change these environment variables for your configuration:   AZURE_SUBSCRIPTION_ID, AZURE_RESOURCE_GROUP
         scope: resourcegroup  
         subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-        resourceGroupName:  ${{ env.AZURE_RESOURCE_GROUP' }}
+        resourceGroupName:  ${{ env.AZURE_RESOURCE_GROUP }}
         template: ARM/la-template.json  # Set this to the location of your template file
         parameters: ARM/la-parameters.json # Set this to the location of your parameters file
         deploymentMode: Incremental
