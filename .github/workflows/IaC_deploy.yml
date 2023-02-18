@@ -17,8 +17,9 @@ jobs:
     environment: 
       name: Dev
     steps:
+    
     - name: echo resource group
-      run: echo "${{ env.AZURE_RESOURCE_GROUP }}"
+      run: echo "${{ vars.AZURE_RESOURCE_GROUP }}"
 
     - name: Azure Login
       uses: azure/login@v1
