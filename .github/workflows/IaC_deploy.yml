@@ -20,9 +20,6 @@ jobs:
     
     - name: echo resource group
       run: echo "${{ vars.AZURE_RESOURCE_GROUP }}"
-      
-    - name: pwd
-      run: pwd
 
     - name: Azure Login
       uses: azure/login@v1
@@ -33,6 +30,12 @@ jobs:
     # Checkout
     - name: Checkout
       uses: actions/checkout@v1
+
+    - name: pwd
+      run: pwd
+      
+    - name: ls
+      run: ls -la 
 
     # Deployment of template  
     - name: Deploy Logic App Resources
