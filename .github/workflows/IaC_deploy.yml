@@ -20,6 +20,9 @@ jobs:
     
     - name: echo resource group
       run: echo "${{ vars.AZURE_RESOURCE_GROUP }}"
+      
+    - name: pwd
+      run: pwd
 
     - name: Azure Login
       uses: azure/login@v1
