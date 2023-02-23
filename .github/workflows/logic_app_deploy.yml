@@ -73,7 +73,7 @@ jobs:
         LOGIC_APP_NAME: ${{ vars.LOGIC_APP_NAME }}
         AZURE_RESOURCE_GROUP: ${{ vars.AZURE_RESOURCE_GROUP }}
       with:
-        app-name: ${{var.AZURE_RESOURCE_GROUP}}
+        app-name: ${{env.AZURE_RESOURCE_GROUP}}
         package: './build-art/logic.zip'
         publish-profile: ${{steps.publishprofile.outputs.profile}}
 
