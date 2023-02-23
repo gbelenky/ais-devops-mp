@@ -1,8 +1,8 @@
 name: Build and Deploy Logic App. 
 
 env:
-  LOGIC_APP_NAME_DEV: 'ais-devops-mp-dev-la'
-  AZURE_RESOURCE_GROUP_DEV: 'ais-devops-mp-dev-rg'
+  RG: 'ais-devops-mp-dev-la'
+  LANAME: 'ais-devops-mp-dev-rg'
 
 on:
   workflow_dispatch:
@@ -63,8 +63,8 @@ jobs:
       with:
         inlineScript: |
           $profile = Get-AzWebAppPublishingProfile `
-              -ResourceGroupName ${{ env.AZURE_RESOURCE_GROUP_DEV}} `
-              -Name ${{ env.LOGIC_APP_NAME_DEV }}
+              -ResourceGroupName ${{ env.RG}} `
+              -Name ${{ env.LANAME }}
           $profile = $profile.Replace("`r", "").Replace("`n", "")
           Write-Output "::set-output name=profile::$profile"
         azPSVersion: latest
@@ -73,7 +73,7 @@ jobs:
       uses: Azure/functions-action@v1.3.1
       id: la
       with:
-        app-name: ${{env.AZURE_RESOURCE_GROUP_DEV}}
+        app-name: ${{env.RG}}
         package: './build-art/logic.zip'
         publish-profile: ${{steps.publishprofile.outputs.profile}}
 
@@ -82,5 +82,5 @@ jobs:
       uses: azure/powershell@v1
       with:
         inlineScript: |
-          az functionapp deploy --resource-group ${{ env.AZURE_RESOURCE_GROUP_DEV }} --name ${{ env.LOGIC_APP_NAME_DEV }} --src-path  logic-apps/azure.parameters.json --type static --target-path parameters.json
+          az functionapp deploy --resource-group ${{ env.RG }} --name ${{ env.LANAME }} --src-path  logic-apps/azure.parameters.json --type static --target-path parameters.json
         azPSVersion: latest
