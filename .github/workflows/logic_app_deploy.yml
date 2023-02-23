@@ -56,17 +56,17 @@ jobs:
         path: ./build-art/
     
     - name: echo logic app name
-      run: echo "${{ jobs.logic_app_deploy_dev.env.LOGIC_APP_NAME}}"    
+      run: echo "${{ LOGIC_APP_NAME}}"    
 
     - name: echo resource group
-      run: echo "${{ jobs.logic_app_deploy_dev.env.AZURE_RESOURCE_GROUP}}"    
+      run: echo "${{ AZURE_RESOURCE_GROUP}}"    
 
     - name: Get publish Profile
       id: publishprofile
       uses: azure/powershell@v1
       with:
         inlineScript: |
-          $profile = Get-AzWebAppPublishingProfile -ResourceGroupName ${{ jobs.logic_app_deploy_dev.env.AZURE_RESOURCE_GROUP}} -Name ${{ jobs.logic_app_deploy_dev.env.LOGIC_APP_NAME}}
+          $profile = Get-AzWebAppPublishingProfile -ResourceGroupName ${{ env.AZURE_RESOURCE_GROUP}} -Name ${{ env.LOGIC_APP_NAME}}
           $profile = $profile.Replace("`r", "").Replace("`n", "")
           Write-Output "::set-output name=profile::$profile"
         azPSVersion: latest
@@ -84,5 +84,5 @@ jobs:
       uses: azure/powershell@v1
       with:
         inlineScript: |
-          az functionapp deploy --resource-group ${{ jobs.logic_app_deploy_dev.env.AZURE_RESOURCE_GROUP }} --name ${{ jobs.logic_app_deploy_dev.env.LOGIC_APP_NAME }} --src-path  logic-apps/azure.parameters.json --type static --target-path parameters.json
+          az functionapp deploy --resource-group ${{ env.AZURE_RESOURCE_GROUP }} --name ${{ env.LOGIC_APP_NAME }} --src-path  logic-apps/azure.parameters.json --type static --target-path parameters.json
         azPSVersion: latest
