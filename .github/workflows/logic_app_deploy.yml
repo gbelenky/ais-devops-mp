@@ -38,6 +38,9 @@ jobs:
     needs: [logic_app_build]
     environment: 
       name: Dev
+    env:
+      LOGIC_APP_NAME: ${{ vars.LOGIC_APP_NAME }}
+      AZURE_RESOURCE_GROUP: ${{ vars.AZURE_RESOURCE_GROUP }}
     steps: 
     - name: Checkout
       uses: actions/checkout@v1    
@@ -53,17 +56,17 @@ jobs:
         path: ./build-art/
     
     - name: echo logic app name
-      run: echo "${{ vars.LOGIC_APP_NAME }}"    
+      run: echo "${{ jobs.logic_app_deploy_dev.env.LOGIC_APP_NAME}}"    
 
     - name: echo resource group
-      run: echo "${{ vars.AZURE_RESOURCE_GROUP }}"    
+      run: echo "${{ jobs.logic_app_deploy_dev.env.AZURE_RESOURCE_GROUP}}"    
 
     - name: Get publish Profile
       id: publishprofile
       uses: azure/powershell@v1
       with:
         inlineScript: |
-          $profile = Get-AzWebAppPublishingProfile -ResourceGroupName ${{ vars.AZURE_RESOURCE_GROUP}} -Name ais-devops-mp-dev-la -Verbose
+          $profile = Get-AzWebAppPublishingProfile -ResourceGroupName ${{ jobs.logic_app_deploy_dev.env.AZURE_RESOURCE_GROUP}} -Name ${{ jobs.logic_app_deploy_dev.env.LOGIC_APP_NAME}}
           $profile = $profile.Replace("`r", "").Replace("`n", "")
           Write-Output "::set-output name=profile::$profile"
         azPSVersion: latest
@@ -81,5 +84,5 @@ jobs:
       uses: azure/powershell@v1
       with:
         inlineScript: |
-          az functionapp deploy --resource-group ${{ vars.AZURE_RESOURCE_GROUP }} --name ${{ vars.LOGIC_APP_NAME }} --src-path  logic-apps/azure.parameters.json --type static --target-path parameters.json
+          az functionapp deploy --resource-group ${{ jobs.logic_app_deploy_dev.env.AZURE_RESOURCE_GROUP }} --name ${{ jobs.logic_app_deploy_dev.env.LOGIC_APP_NAME }} --src-path  logic-apps/azure.parameters.json --type static --target-path parameters.json
         azPSVersion: latest
