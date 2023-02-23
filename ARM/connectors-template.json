@@ -13,7 +13,13 @@
         "connections_location": {
             "defaultValue": "tenantid",
             "type": "String"
-        }
+        },
+        "logicAppSystemAssignedIdentityTenantId": {
+            "type": "string"
+        },
+        "logicAppSystemAssignedIdentityObjectId": {
+            "type": "string"
+        },
     },
     "variables": {
         "subscriptionId": "[subscription().subscriptionId]"
