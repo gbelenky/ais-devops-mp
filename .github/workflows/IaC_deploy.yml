@@ -46,7 +46,7 @@ jobs:
         scope: resourcegroup  
         subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
         resourceGroupName:  ${{ vars.AZURE_RESOURCE_GROUP }}
-        template: ARM/la-template-dev.json  # Set this to the location of your template file
+        template: ARM/la-template.json  # Set this to the location of your template file
         parameters: ARM/la-parameters-dev.json # Set this to the location of your parameters file
         deploymentMode: Incremental
    
