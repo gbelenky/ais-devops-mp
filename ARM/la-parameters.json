@@ -6,19 +6,19 @@
             "value": "westeurope"
         },
         "environmentName": {
-            "value": "env-name"
+            "value": "Dev"
         },
         "projectName": {
-            "value": "project-name"
+            "value": "email-triggered-la-dev"
         },
         "logicAppName": {
-            "value": "la-name"
+            "value": "email-triggered-la-dev"
         },
         "appServicePlanName": {
-            "value": "asp-name"
+            "value": "email-triggered-la-dev"
         },
         "storageName": {
-            "value": "lastgb4711"
+            "value": "emailtriggeredladev"
         },
         "kind": {
             "value": "StorageV2"
