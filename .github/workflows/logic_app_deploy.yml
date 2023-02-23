@@ -60,6 +60,7 @@ jobs:
     - name: Get publish Profile
       id: publishprofile
       uses: azure/powershell@v1
+      
       with:
         inlineScript: |
           $profile = Get-AzWebAppPublishingProfile `
