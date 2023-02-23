@@ -50,6 +50,9 @@ jobs:
         parameters: ARM/la-parameters-dev.json # Set this to the location of your parameters file
         deploymentMode: Incremental
    
+    - name: echo steps.ladeploy.outputs
+      run: echo ${{ steps.ladeploy.outputs}}
+   
     # Deployment of template    
     - name: Deploy Connector Resources 
       id: conndeploy
