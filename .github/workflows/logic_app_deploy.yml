@@ -1,8 +1,8 @@
 name: Build and Deploy Logic App. 
 
 env:
-  LOGIC_APP_NAME: ${{ vars.LOGIC_APP_NAME }}
-  AZURE_RESOURCE_GROUP: ${{ vars.AZURE_RESOURCE_GROUP }}
+  LOGIC_APP_NAME: '${{ vars.LOGIC_APP_NAME }}'
+  AZURE_RESOURCE_GROUP: '${{ vars.AZURE_RESOURCE_GROUP }}''
 
 on:
   workflow_dispatch:
