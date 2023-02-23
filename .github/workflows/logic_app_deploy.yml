@@ -41,6 +41,7 @@ jobs:
     steps: 
     - name: Checkout
       uses: actions/checkout@v1    
+
     - name: Login via Az module
       uses: azure/login@v1
       with:
@@ -50,7 +51,14 @@ jobs:
       with:
         name: logic
         path: ./build-art/
-        
+    
+    - name: echo logic app name
+      run: echo "${{ vars.LOGIC_APP_NAME }}"    
+
+    - name: echo resource group
+      run: echo "${{ vars.AZURE_RESOURCE_GROUP }}"    
+
+
     - name: Get publish Profile
       id: publishprofile
       uses: azure/powershell@v1
