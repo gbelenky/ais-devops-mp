@@ -1,0 +1,57 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "connections_office365_name": {
+            "defaultValue": "office365",
+            "type": "String"
+        },
+        "connections_resourcegroup": {
+            "defaultValue": "resourcegroup",
+            "type": "String"
+        },
+        "connections_location": {
+            "defaultValue": "tenantid",
+            "type": "String"
+        }
+    },
+    "variables": {
+        "subscriptionId": "[subscription().subscriptionId]"
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Web/connections",
+            "apiVersion": "2016-06-01",
+            "name": "[parameters('connections_office365_name')]",
+            "location": "westeurope",
+            "kind": "V2",
+            "properties": {
+                "displayName": "[parameters('connections_office365_name')]",
+                "statuses": [
+                    {
+                        "status": "Connected"
+                    }
+                ],
+                "customParameterValues": {},
+                "nonSecretParameterValues": {},
+                "createdTime": "2023-02-15T18:34:59.4322862Z",
+                "changedTime": "2023-02-16T16:18:07.2248032Z",
+                "api": {
+                    "name": "[parameters('connections_office365_name')]",
+                    "displayName": "Office 365 Outlook",
+                    "description": "Microsoft Office 365 is a cloud-based service that is designed to help meet your organization's needs for robust security, reliability, and user productivity.",
+                    "iconUri": "[concat('https://connectoricons-prod.azureedge.net/releases/v1.0.1618/1.0.1618.3179/', 'office365', '/icon.png')]",
+                    "brandColor": "#0078D4",
+                    "id": "[concat('/subscriptions/',variables('subscriptionId'),'/providers/Microsoft.Web/locations/',parameters('connections_location'),'/managedApis/', 'office365')]",
+                    "type": "Microsoft.Web/locations/managedApis"
+                },
+                "testLinks": [
+                    {
+                        "requestUri": "[concat('https://management.azure.com:443/subscriptions/b651dacd-e6f5-465b-a17c-25f3a2cdd0c8/resourceGroups/',parameters('connections_resourcegroup'),'/providers/Microsoft.Web/connections/', parameters('connections_office365_name'), '/extensions/proxy/testconnection?api-version=2016-06-01')]",
+                        "method": "get"
+                    }
+                ]
+            }
+        }
+    ]
+}
