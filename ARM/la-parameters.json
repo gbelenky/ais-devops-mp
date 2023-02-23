@@ -2,14 +2,6 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "storageNamePrefix": {
-            "type": "string",
-            "maxLength": 11,
-            "defaultValue": "storage",
-            "metadata": {
-            "description": "The prefix value for the storage account name."
-            }
-        },
         "location": {
             "value": "westeurope"
         },
@@ -26,7 +18,7 @@
             "value": "asp-name"
         },
         "storageName": {
-            "value": "[concat(parameters('storageNamePrefix'), uniquestring(resourceGroup().id))]"
+            "value": "lastgb4711"
         },
         "kind": {
             "value": "StorageV2"
