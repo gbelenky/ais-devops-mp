@@ -51,7 +51,7 @@ jobs:
         deploymentMode: Incremental
    
     - name: echo steps.ladeploy.outputs
-      run: echo ${{ steps.ladeploy.outputs}}
+      run: echo ${{ steps.ladeploy.outputs.logicAppSystemAssignedIdentityTenantId}}
    
     # Deployment of template    
     - name: Deploy Connector Resources 
