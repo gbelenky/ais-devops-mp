@@ -1,8 +1,8 @@
 name: Build and Deploy Logic App. 
 
 env:
-  RG: 'ais-devops-mp-dev-la'
-  LANAME: 'ais-devops-mp-dev-rg'
+  RG: 'ais-devops-mp-dev-rg'
+  LANAME: 'ais-devops-mp-dev-la'
 
 on:
   workflow_dispatch:
@@ -60,11 +60,11 @@ jobs:
     - name: Get publish Profile
       id: publishprofile
       uses: azure/powershell@v1
-      
+
       with:
         inlineScript: |
           $profile = Get-AzWebAppPublishingProfile `
-              -ResourceGroupName ${{ env.RG}} `
+              -ResourceGroupName ais-devops-mp-dev-la `
               -Name ${{ env.LANAME }}
           $profile = $profile.Replace("`r", "").Replace("`n", "")
           Write-Output "::set-output name=profile::$profile"
