@@ -19,7 +19,7 @@
         },
         "logicAppSystemAssignedIdentityObjectId": {
             "type": "string"
-        },
+        }
     },
     "variables": {
         "subscriptionId": "[subscription().subscriptionId]"
