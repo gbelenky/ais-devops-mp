@@ -18,7 +18,7 @@
             "value": "asp-name"
         },
         "storageName": {
-            "value": "storagename"
+            "value": "[concat('storage', uniqueString(resourceGroup().id))]"
         },
         "kind": {
             "value": "StorageV2"
