@@ -64,8 +64,8 @@ jobs:
       with:
         inlineScript: |
           $profile = Get-AzWebAppPublishingProfile `
-              -ResourceGroupName ais-devops-mp-dev-la `
-              -Name ${{ env.LANAME }}
+              -ResourceGroupName ais-devops-mp-dev-rg `
+              -Name email-triggered-la-dev 
           $profile = $profile.Replace("`r", "").Replace("`n", "")
           Write-Output "::set-output name=profile::$profile"
         azPSVersion: latest
