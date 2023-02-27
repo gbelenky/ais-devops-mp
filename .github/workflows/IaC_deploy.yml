@@ -52,6 +52,8 @@ jobs:
    
     - name: echo steps.ladeploy.outputs
       run: echo ${{ steps.ladeploy.outputs.logicAppSystemAssignedIdentityTenantId}}
+    - name: echo steps.ladeploy.outputs LaName
+      run: echo ${{ steps.ladeploy.outputs.LAname }}
    
     # Deployment of template    
     - name: Deploy Connector Resources 
@@ -116,6 +118,8 @@ jobs:
     
     - name: echo steps.ladeploy.outputs
       run: echo ${{ steps.ladeploy.outputs.logicAppSystemAssignedIdentityTenantId}}
+    - name: echo steps.ladeploy.outputs LaName
+      run: echo ${{ steps.ladeploy.outputs.LAname }}
     
     # Deployment of template    
     - name: Deploy Connector Resources 
