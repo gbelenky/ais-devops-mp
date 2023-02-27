@@ -74,7 +74,7 @@ jobs:
 
 
 
-jobs:
+  DeployQA:
     name: Deploy Infrastructure to QA 
     needs: [DeployDev]
     environment: 
