@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/azure/functions-action
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Deploy Infrastructure to Dev
+name: Deploy Infrastructure
 
 on:
   workflow_dispatch:
@@ -12,7 +12,7 @@ on:
 
 jobs:
   DeployDev:
-    name: Deploy to Dev
+    name: Deploy Infrastructure to Dev
     runs-on: ubuntu-latest
     environment: 
       name: Dev
