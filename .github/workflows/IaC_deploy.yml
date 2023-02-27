@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/azure/functions-action
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Deploy Infrastructure to Dev 
+name: Deploy Infrastructure 
 
 on:
   workflow_dispatch:
@@ -127,6 +127,71 @@ jobs:
         resourceGroupName: ${{ vars.AZURE_RESOURCE_GROUP}}
         template: ARM/connectors-template.json  # Set this to the location of your template file
         parameters: ARM/connectors-parameters-qa.json logicAppSystemAssignedIdentityTenantId=${{ steps.ladeploy.outputs.logicAppSystemAssignedIdentityTenantId }} logicAppSystemAssignedIdentityObjectId=${{ steps.ladeploy.outputs.logicAppSystemAssignedIdentityObjectId }}
+        deploymentMode: Incremental
+
+    - name: Update Logic App Connections 
+      uses: azure/CLI@v1
+      with:
+        inlineScript: |
+          az functionapp config appsettings set --name ${{ steps.ladeploy.outputs.LAname }} --resource-group  ${{ vars.AZURE_RESOURCE_GROUP }} --settings "BLOB_CONNECTION_RUNTIMEURL=${{ steps.msdemoconn.outputs.blobendpointurl }}"
+          az functionapp config appsettings set --name ${{ steps.ladeploy.outputs.LAname }} --resource-group  ${{ vars.AZURE_RESOURCE_GROUP}} --settings "WORKFLOWS_RESOURCE_GROUP_NAME=${{ env.AZURE_RESOURCE_GROUP}}"
+
+  DeployProd:
+    name: Deploy Infrastructure to Prod
+    runs-on: ubuntu-latest 
+    needs: [DeployQA]
+    environment: 
+      name: Prod
+    steps:
+    
+    - name: echo resource group
+      run: echo "${{ vars.AZURE_RESOURCE_GROUP }}"
+
+    - name: Azure Login
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS  }}
+        enable-AzPSSession: true 
+
+    # Checkout
+    - name: Checkout
+      uses: actions/checkout@v1
+
+    - name: pwd
+      run: pwd
+      
+    - name: ls
+      run: ls -la 
+
+    # Deployment of template  
+    - name: Deploy Logic App Resources
+      uses: Azure/arm-deploy@v1.0.1
+      id: ladeploy
+      with:
+        # You can change these environment variables for your configuration:   AZURE_SUBSCRIPTION_ID, AZURE_RESOURCE_GROUP
+        scope: resourcegroup  
+        subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        resourceGroupName:  ${{ vars.AZURE_RESOURCE_GROUP }}
+        template: ARM/la-template.json  # Set this to the location of your template file
+        parameters: ARM/la-parameters-prod.json # Set this to the location of your parameters file
+        deploymentMode: Incremental
+    
+    - name: echo steps.ladeploy.outputs
+      run: echo ${{ steps.ladeploy.outputs.logicAppSystemAssignedIdentityTenantId}}
+    
+    - name: echo steps.ladeploy.outputs LaName
+      run: echo ${{ steps.ladeploy.outputs.LAname }}
+
+    # Deployment of template    
+    - name: Deploy Connector Resources 
+      id: conndeploy
+      uses: Azure/arm-deploy@v1.0.1
+      with:
+        scope: resourcegroup  
+        subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        resourceGroupName: ${{ vars.AZURE_RESOURCE_GROUP}}
+        template: ARM/connectors-template.json  # Set this to the location of your template file
+        parameters: ARM/connectors-parameters-prod.json logicAppSystemAssignedIdentityTenantId=${{ steps.ladeploy.outputs.logicAppSystemAssignedIdentityTenantId }} logicAppSystemAssignedIdentityObjectId=${{ steps.ladeploy.outputs.logicAppSystemAssignedIdentityObjectId }}
         deploymentMode: Incremental
 
     - name: Update Logic App Connections 
