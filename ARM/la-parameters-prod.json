@@ -6,7 +6,7 @@
             "value": "westeurope"
         },
         "environmentName": {
-            "value": "QA"
+            "value": "Prod"
         },
         "projectName": {
             "value": "email-triggered-la-prod"
@@ -18,7 +18,7 @@
             "value": "email-triggered-la-prod"
         },
         "storageName": {
-            "value": "emailtriggeredlaqa"
+            "value": "emailtriggeredlaprod"
         },
         "kind": {
             "value": "StorageV2"
