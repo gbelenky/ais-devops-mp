@@ -75,7 +75,8 @@ jobs:
 
 
   DeployQA:
-    name: Deploy Infrastructure to QA 
+    name: Deploy Infrastructure to QA
+    runs-on: ubuntu-latest 
     needs: [DeployDev]
     environment: 
       name: QA
