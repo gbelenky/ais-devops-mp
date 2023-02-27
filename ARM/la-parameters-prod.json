@@ -1,0 +1,33 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "value": "westeurope"
+        },
+        "environmentName": {
+            "value": "QA"
+        },
+        "projectName": {
+            "value": "email-triggered-la-prod"
+        },
+        "logicAppName": {
+            "value": "email-triggered-la-prod"
+        },
+        "appServicePlanName": {
+            "value": "email-triggered-la-prod"
+        },
+        "storageName": {
+            "value": "emailtriggeredlaqa"
+        },
+        "kind": {
+            "value": "StorageV2"
+        },
+        "skuName": {
+            "value": "Standard_LRS"
+        },
+        "skuTier": {
+            "value": "Standard"
+          }
+        }
+    }
