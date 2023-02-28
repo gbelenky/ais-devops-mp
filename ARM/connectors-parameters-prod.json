@@ -6,7 +6,7 @@
             "value": "office365"
         },
         "connections_resourcegroup": {
-            "value": "ais-devops-prod-rg"
+            "value": "ais-devops-mp-prod-rg"
         },
         "connections_location": {
             "value": "westeurope"
