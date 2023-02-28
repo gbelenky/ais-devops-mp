@@ -1,21 +1,17 @@
 name: Build and Deploy Logic App. 
 
-env:
-  RG: 'ais-devops-mp-dev-rg'
-  LANAME: 'email-triggered-la-dev'
-
 on:
   workflow_dispatch:
     # Trigger the workflow every time the infrastructure build workflow ran to completion
   workflow_run:
     workflows:
-      - Logic App Infrastructure as Code Pipeline.
+      - Deploy Infrastructure
     types:
       - completed
   # Triggers when Logic Apps workflow logic has changed  
   push:
     paths:
-      - "logic/**"
+      - "logic-apps/**"
       - ".github/workflows/logicapp_deploy.yml"
 
 jobs:
@@ -83,5 +79,5 @@ jobs:
       uses: azure/powershell@v1
       with:
         inlineScript: |
-          az functionapp deploy --resource-group ${{ env.RG }} --name ${{ env.LANAME }} --src-path  logic-apps/azure.parameters.json --type static --target-path parameters.json
+          az functionapp deploy --resource-group ${{vars.AZURE_RESOURCE_GROUP}} --name ${{vars.LOGIC_APP_NAME}} --src-path  logic-apps/azure.parameters.json --type static --target-path parameters.json
         azPSVersion: latest
