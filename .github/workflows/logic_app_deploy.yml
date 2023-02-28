@@ -70,7 +70,7 @@ jobs:
       uses: Azure/functions-action@v1.3.1
       id: la
       with:
-        app-name: ${{env.RG}}
+        app-name: ${{vars.LOGIC_APP_NAME}}
         package: './build-art/logic.zip'
         publish-profile: ${{steps.publishprofile.outputs.profile}}
 
