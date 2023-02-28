@@ -56,19 +56,25 @@
                         "requestUri": "[concat('https://management.azure.com:443/subscriptions/b651dacd-e6f5-465b-a17c-25f3a2cdd0c8/resourceGroups/',parameters('connections_resourcegroup'),'/providers/Microsoft.Web/connections/', parameters('connections_office365_name'), '/extensions/proxy/testconnection?api-version=2016-06-01')]",
                         "method": "get"
                     }
-                ],
-                "accessPolicies": [
-                    {
-                        "objectId": "[parameters('logicAppSystemAssignedIdentityObjectId')]",
-                        "tenantId": "[parameters('logicAppSystemAssignedIdentityTenantId')]",
-                        "permissions": {
-                            "actions": [
-                                "*"
-                            ],
-                            "notActions": []
-                        }
-                    }
                 ]
+            }
+        },
+        {
+            "type": "Microsoft.Web/connections/accessPolicies",
+            "apiVersion": "2016-06-01",
+            "name": "[concat(parameters('connections_office365_name'),'/',parameters('logicAppSystemAssignedIdentityObjectId'))]",
+            "location": "[parameters('connections_location')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/connections', parameters('connections_office365_name'))]"
+            ],
+            "properties": {
+                "principal": {
+                    "type": "ActiveDirectory",
+                    "identity": {
+                        "tenantId": "[parameters('logicAppSystemAssignedIdentityTenantId')]",
+                        "objectId": "[parameters('logicAppSystemAssignedIdentityObjectId')]"
+                    }
+                }
             }
         }
     ]
