@@ -29,7 +29,7 @@
             "type": "Microsoft.Web/connections",
             "apiVersion": "2016-06-01",
             "name": "[parameters('connections_office365_name')]",
-            "location": "parameters('connections_location')",
+            "location": "[parameters('connections_location')]",
             "kind": "V2",
             "properties": {
                 "displayName": "[parameters('connections_office365_name')]",
