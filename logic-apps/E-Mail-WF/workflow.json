@@ -28,7 +28,7 @@
                             "folderPath": "Inbox",
                             "importance": "Any",
                             "fetchOnlyWithAttachment": false,
-                            "includeAttachments": true
+                            "includeAttachments": false
                         },
                         "pathTemplate": {
                             "template": "/v3/Mail/OnNewEmail"
