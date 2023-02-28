@@ -11,7 +11,7 @@
             "type": "String"
         },
         "connections_location": {
-            "defaultValue": "tenantid",
+            "defaultValue": "westeurope",
             "type": "String"
         },
         "logicAppSystemAssignedIdentityTenantId": {
