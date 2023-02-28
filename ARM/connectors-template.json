@@ -63,7 +63,7 @@
             "type": "Microsoft.Web/connections/accessPolicies",
             "apiVersion": "2016-06-01",
             "name": "[concat(parameters('connections_office365_name'),'/',parameters('logicAppSystemAssignedIdentityObjectId'))]",
-            "location": "[parameters('location')]",
+            "location": "[parameters('connections_location')]",
             "dependsOn": [
                 "[resourceId('Microsoft.Web/connections', parameters('connections_office365_name'))]"
             ],
