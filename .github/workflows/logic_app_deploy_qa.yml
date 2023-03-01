@@ -1,5 +1,9 @@
 name: Build and Deploy Logic App to QA. 
 
+on:
+  schedule:
+    - cron: "0 0 * * *"
+
 check_date:
     runs-on: ubuntu-latest
     name: Check latest commit
@@ -15,7 +19,6 @@ check_date:
         name: check latest commit is less than a day
         if: ${{ github.event_name == 'schedule' }}
         run: test -z $(git rev-list  --after="24 hours"  ${{ github.sha }}) && echo "::set-output name=should_run::false"
-
 
 jobs:
   logic_app_build: 
