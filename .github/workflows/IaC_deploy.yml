@@ -205,7 +205,7 @@ jobs:
           az functionapp config appsettings set --name ${{ steps.ladeploy.outputs.LAname }} --resource-group  ${{ vars.AZURE_RESOURCE_GROUP }} --settings "BLOB_CONNECTION_RUNTIMEURL=${{ steps.msdemoconn.outputs.blobendpointurl }}"
           az functionapp config appsettings set --name ${{ steps.ladeploy.outputs.LAname }} --resource-group  ${{ vars.AZURE_RESOURCE_GROUP}} --settings "WORKFLOWS_RESOURCE_GROUP_NAME=${{ env.AZURE_RESOURCE_GROUP}}"
 
-DeployProd:
+  DeployProd:
     name: Deploy Infrastructure to Prod
     runs-on: ubuntu-latest 
     needs: [DeployPreProd]
