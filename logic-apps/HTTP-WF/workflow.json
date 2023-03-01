@@ -7,7 +7,7 @@
                 "kind": "http",
                 "inputs": {
                     "statusCode": 200,
-                    "body": "@triggerBody()?['message']"
+                    "body": "@{triggerBody()?['message']} for you "
                 },
                 "runAfter": {}
             }
