@@ -24,6 +24,7 @@ jobs:
   logic_app_build: 
     name: Build QA
     runs-on: ubuntu-latest
+    needs: [check_date]
     environment: 
       name: QA
     steps: 
