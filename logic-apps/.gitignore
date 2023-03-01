@@ -8,3 +8,5 @@ local.settings.json
 # azurite   (Azure Storage Emulator)
 __azurite*
 *__*
+
+todelete-*
