@@ -3,7 +3,8 @@ name: Build and Deploy Logic App to QA.
 on:
   schedule:
     - cron: "0 0 * * *"
-
+  workflow_dispatch:
+    
 jobs:
   logic_app_build: 
     name: Build QA
